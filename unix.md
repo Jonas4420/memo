@@ -151,7 +151,7 @@ pdftk <INPUT> cat <N>-<M> output <OUTPUT>
 pdftk <INPUT_1> ... <INPUT_N> cat output <OUTPUT>
 
 # Remove password from PDF
-pdftk <INPUT> input_wd PROMPT output <OUTPUT>
+pdftk <INPUT> input_pw PROMPT output <OUTPUT>
 ```
 
 # rpm
