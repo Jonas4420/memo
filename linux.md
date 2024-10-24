@@ -74,6 +74,25 @@ objdump --disassemble-all
 objdump -x <BINARY> | grep 'R.*PATH'
 ```
 
+## Extract ELF symbol value
+
+```bash
+# List symbols of ELF file (binary, .o, .so)
+$ objdump -t <ELF_FILE> | grep <SYMBOL>
+0000000000066020 l     O .data  <SIZE>              <SYMBOL>
+
+# Get symbol offset (not always needed)
+$ objdump -D -F <ELF_FILE> | grep <SYMBOL>
+0000000000066020 <<SYMBOL>> (File Offset: <OFFSET>):
+
+# Extract symbol with size at given offset
+$ dd if=<ELF_FILE> of=<OUTPUT> ibs=1 skip=<OFFSET> count=<SIZE>
+```
+
+**Note:** for symbols that are pointers, the extraction will extract the pointed address.
+A second extraction is needed to get the actual value.
+For instance, `const char *STRING = "..."` needs two-steps, but `const char STRING[] = "..."` needs not.
+
 # readelf
 
 ## Check for NX bit
